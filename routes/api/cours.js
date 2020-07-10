@@ -32,12 +32,21 @@ router.put("/:id", auth, (req, res) => {
   Cour.findOneAndUpdate({ _id: id }, data).then((cour) => res.json(cour));
 });
 
-// @route   DELETE api/cours
+// @route   DELETE api/cours/:id
 // @desc    Delete a course by ID
 // @access  Private
 router.delete("/:id", auth, (req, res) => {
   Cour.findById(req.params.id)
     .then((cour) => cour.remove().then(() => res.json({ deleteSuccess: true })))
+    .catch((err) => res.status(404).json({ deleteSuccess: false }));
+});
+
+// @route   DELETE api/cours/user/:id
+// @desc    Delete a course by ID
+// @access  Private
+router.delete("/user/:id", auth, (req, res) => {
+  Cour.deleteMany({id_author : req.params.id})
+    .then(() => res.json({ deleteSuccess: true }))
     .catch((err) => res.status(404).json({ deleteSuccess: false }));
 });
 

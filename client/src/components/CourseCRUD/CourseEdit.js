@@ -12,17 +12,18 @@ class CourseEdit extends Component {
         courseID : null,
         course : null
     }
-    async componentDidMount(){
-        await this.props.getCourses()
+    /*async*/ componentDidMount(){
+        console.log('this.props.courses.courses', this.props.courses.courses)
+
+        // await this.props.getCourses()
         this.setState({
             ...this.state,
             courseID: this.props.match.params.id
         })
     }
     componentDidUpdate(){
-        let actualCourse = this.props.courses.courses.find(course => {
-            return course._id === this.state.courseID
-        })
+        console.log('this.props.courses.courses', this.props.courses.courses)
+        let actualCourse = this.props.courses.courses.find(course =>course._id === this.state.courseID)
         if (actualCourse && !this.state.course) this.setState({
             course: actualCourse
         })

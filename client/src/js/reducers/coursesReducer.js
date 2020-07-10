@@ -7,6 +7,7 @@ import {
   LOADING_COURSE,
   UPDATE_COURSE_SUCCESS,
   DELETE_COURSE_FAIL,
+  DELETE_COURSE_USER,
 } from "../actions/types";
 
 const initialState = {
@@ -39,10 +40,7 @@ export default function (state = initialState, action) {
     case UPDATE_COURSE:
       return {
         ...state,
-        courses: state.courses.map((course) => {
-          if (course._id === action.payload.course._id)
-            return action.payload.course;
-        }),
+        courses: state.courses.map((course) => course._id === action.payload.course._id ? action.payload.course : course ),
         loading: false,
         createdCourse: action.payload.course._id,
       };
@@ -51,6 +49,14 @@ export default function (state = initialState, action) {
         ...state,
         courses: state.courses.filter(
           (course) => course._id !== action.payload.courseID
+        ),
+        loading: false,
+      };
+    case DELETE_COURSE_USER:
+      return {
+        ...state,
+        courses: state.courses.filter(
+          (course) => course.id_author !== action.payload.userID
         ),
         loading: false,
       };

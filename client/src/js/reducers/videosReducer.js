@@ -1,11 +1,10 @@
 import {
   GET_VIDEOS,
-  GET_VIDEOS_BY_COURSE,
-  GET_VIDEO_BY_ID,
   ADD_VIDEO,
   DELETE_VIDEO,
   UPDATE_VIDEO,
   LOADING_VIDEOS,
+  // DELETE_USER_VIDEO,
 } from "../actions/types";
 
 const initialState = {
@@ -28,17 +27,29 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case UPDATE_VIDEO:
-        return {
-            ...state,
-            videos : state.videos.map(video=> video._id===action.payload.video._id ? action.payload.video : video),
-            loading : false
-        }
+      return {
+        ...state,
+        videos: state.videos.map((video) =>
+          video._id === action.payload.video._id ? action.payload.video : video
+        ),
+        loading: false,
+      };
     case DELETE_VIDEO:
-        return {
-            ...state,
-            videos: state.videos.filter(video => video._id !== action.payload.videoID),
-            loading : false
-        }
+      return {
+        ...state,
+        videos: state.videos.filter(
+          (video) => video._id !== action.payload.videoID
+        ),
+        loading: false,
+      };
+    // case DELETE_USER_VIDEO:
+    //   return {
+    //     ...state,
+    //     videos: state.videos.filter(
+    //       (video) => video._id !== action.payload.videoID
+    //     ),
+    //     loading: false,
+    //   };
     case LOADING_VIDEOS:
       return {
         ...state,

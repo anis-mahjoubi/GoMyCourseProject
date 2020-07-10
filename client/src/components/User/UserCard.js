@@ -8,10 +8,12 @@ import {
   Alert,
   CardHeader,
   CardBody,
+  Container,
 } from "reactstrap";
 import { updateUser, deleteUser } from "../../js/actions/usersActions";
 import { logout } from "../../js/actions/authActions";
 import { connect } from "react-redux";
+import DeleteUser from './DeleteUser'
 
 class UserCard extends Component {
   state = {
@@ -179,17 +181,23 @@ class UserCard extends Component {
                   />
                 </FormGroup>
               )}
-              <Button
-                onClick={this.save}
-                color={
-                  this.state.user === this.state.oldUser ? "primary" : "danger"
-                }
-              >
-                Save
-              </Button>
-              <Button onClick={this.delete} color="danger" className="mx-2">
+              
+              {/* <Button onClick={this.delete} color="danger" className="mx-2">
                 {this.props.admin ? "Delete" : "Delete my account"}
+              </Button> */}
+
+              <div className="d-inline-flex">
+                <Button
+                  onClick={this.save}
+                  color={
+                    this.state.user === this.state.oldUser ? "primary" : "danger"
+                  }
+                >
+                  Save
               </Button>
+                <DeleteUser userID={this.state.user._id} />
+
+              </div>
             </Form>
           </CardBody>
         </div>

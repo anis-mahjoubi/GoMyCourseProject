@@ -81,7 +81,7 @@ class CourseEditHeader extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <Button onClick={this.save} color="primary">
+         <Button onClick={this.save} color="primary" id="saveCourse">
           Save
         </Button>
         <Button onClick={this.delete} color="danger" className="mx-2">

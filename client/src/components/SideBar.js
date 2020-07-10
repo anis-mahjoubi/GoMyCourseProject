@@ -56,7 +56,7 @@ class SideBar extends Component {
 
                 <li className="nav-item">
                   <Link className="nav-link" to="/categories">
-                    <i className="fas fa-fw fa-folder"></i>
+                    <i class="fas fa-th"></i>
                     <span>Categories</span>
                   </Link>
                 </li>

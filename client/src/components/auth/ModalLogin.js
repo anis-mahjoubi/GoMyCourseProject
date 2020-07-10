@@ -23,11 +23,6 @@ class ModalLogin extends Component {
     password: "",
   };
 
-  componentDidUpdate(prev) {
-    if (this.state.isModalOpen && this.props.isAuthenticated)
-    this.props.history.push(`/dashboard`);
-  }
-
   toggle = () => {
     this.props.clearErrors();
     this.setState({
@@ -45,7 +40,9 @@ class ModalLogin extends Component {
   };
   confirm = (event) => {
     event.preventDefault();
-    this.props.login(this.state);
+    this.props.login(this.state); 
+    if (this.props.isAuthenticated)  this.props.history.push(`/dashboard`);
+
   };
 
   handleChange = (e) => {
@@ -53,7 +50,6 @@ class ModalLogin extends Component {
   };
 
   render() {
-    if (this.props.isAuthenticated) return <Redirect to="/dashboard"/>
     return (
       <div>
         <Button color="link" onClick={this.toggle}>
@@ -65,11 +61,12 @@ class ModalLogin extends Component {
           className="SignupModal"
         >
           <ModalHeader toggle={this.toggle}>Welcome to GoMyCourse</ModalHeader>
+          <Form onSubmit={this.confirm}>
           <ModalBody>
             {this.props.error.id === "LOGIN_FAIL" ? (
               <Alert>{this.props.error.msg}</Alert>
             ) : null}
-            <Form onSubmit={this.confirm}>
+            
               <FormGroup>
                 <Label for="email">Email</Label>
                 <Input
@@ -90,16 +87,18 @@ class ModalLogin extends Component {
                   onChange={this.handleChange}
                 />
               </FormGroup>
-            </Form>
+            
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.confirm}>
+            <Button color="primary" onClick={this.confirm} type="submit">
               confirm
             </Button>
             <Button color="secondary" onClick={this.close}>
               Cancel
             </Button>
           </ModalFooter>
+          </Form>
+
         </Modal>
       </div>
     );

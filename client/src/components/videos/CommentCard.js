@@ -10,7 +10,7 @@ function CommentCard({ comment, deleteComment, user }) {
         <br />
         {comment.message}
       </p>
-      {user._id === comment.user._id ? (
+      {user._id === comment.user._id || user.role==="admin" ? (
         <Button
           class="btn btn-danger"
           color="danger"

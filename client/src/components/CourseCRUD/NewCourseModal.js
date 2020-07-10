@@ -67,7 +67,7 @@ class NewCourseModal extends Component {
     }
       return (
         <div style={{ padding: "0.25em 0.5em" }}>
-          <Button color="primary" onClick={this.toggle}>
+          <Button color="primary" onClick={this.toggle} style={{ lineHeight:"90%"}} className="py-3">
             Create course
           </Button>
           <Modal

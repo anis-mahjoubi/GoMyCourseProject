@@ -5,6 +5,8 @@ import {
   LOADING_COMMENT,
   ADD_COMMENT_FAIL,
   DELETE_COMMENT_FAIL,
+  DELETE_COMMENT_USER,
+  DELETE_COMMENT_USER_FAIL
 } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors, clearErrors } from "./errorActions";
@@ -66,6 +68,29 @@ export const deleteComment = commentID => (dispatch,getState) => {
       )
     })
 }
+
+
+export const deleteUserComments = userID => (dispatch, getState) => {
+  dispatch(setCommentsLoading());
+  axios.delete(`/api/comments/user/${userID}`, tokenConfig(getState))
+    .then(res => {
+      dispatch(clearErrors())
+      dispatch({
+        type: DELETE_COMMENT_USER,
+        payload: { userID },
+      });
+    })
+    .catch(err => {
+      dispatch(
+        returnErrors(
+          err.response.data.msg,
+          err.response.status,
+          DELETE_COMMENT_USER_FAIL
+        )
+      )
+    })
+}
+
 
 export const setCommentsLoading = () => {
   return {

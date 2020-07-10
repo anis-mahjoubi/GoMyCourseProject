@@ -39,15 +39,16 @@ class HomeNavBar extends Component {
         {/* <Form className="inline" onSubmit={this.reasurchValidation}>
           <SearchModal/>
         </Form> */}
-        <Link to="/courses" className="nav-item font-weight-bold">Courses</Link>
+        <Link to="/dashboard" className="nav-item font-weight-bold">Dashboard</Link>
+        {/* <Link to="/courses" className="nav-item font-weight-bold">Courses</Link> */}
         <NewCourseModal />
-        <div class="topbar-divider d-none d-sm-block" />
+        <div class="topbar-divider d-none d-sm-block " />
         <UncontrolledDropdown
           nav
           inNavbar
           style={{ listStyle: "none" }}
           to="/profil"
-          className="nav-link text-reset"
+          className="nav-link text-reset p-0"
         >
           <DropdownToggle nav caret>
             {this.props.auth.user ? `${this.props.auth.user.name}` : "Welcome"}

@@ -9,41 +9,33 @@ export class Charts extends Component {
   state = {
     myCourses: false,
   };
+  // checkContributer = () => {
+  //   console.log("go gog og o");
+  //   console.log("user" + this.props.auth.user);
+  //   let courses = [];
+  //   if (this.props.auth.user) {
+  //     console.log("i have a user");
+  //     if (this.props.courses) {
+  //       console.log("i have courses");
+  //       console.log("courses list : " + JSON.stringify(this.props.courses));
+  //       courses = this.props.courses.courses.filter(
+  //         (course) => course.id_author === this.props.auth.user._id
+  //       );
+  //       console.log("this is my courses " + JSON.stringify(courses));
+  //     }
+  //   }
 
-  componentDidMount() {
-    // if (!this.state.myCourses && this.props.auth.user) this.checkContributer()
-  }
-  componentDidUpdate() {
-    //console.log(JSON.stringify("user : "+this.props.auth.user))
-    // if(!this.state.myCourses)
-    // this.checkContributer()
-  }
-  checkContributer = () => {
-    console.log("go gog og o");
-    console.log("user" + this.props.auth.user);
-    let courses = [];
-    if (this.props.auth.user) {
-      console.log("i have a user");
-      if (this.props.courses) {
-        console.log("i have courses");
-        console.log("courses list : " + JSON.stringify(this.props.courses));
-        courses = this.props.courses.courses.filter(
-          (course) => course.id_author === this.props.auth.user._id
-        );
-        console.log("this is my courses " + JSON.stringify(courses));
-      }
-    }
-
-    this.setState({
-      ...this.state,
-      myCourses: courses,
-    });
-  };
+  //   this.setState({
+  //     ...this.state,
+  //     myCourses: courses,
+  //   });
+  // };
 
   render() {
-    if (!this.state.myCourses && this.props.auth.user) this.checkContributer();
-    if (!this.state.myCourses) return <h1>Loading </h1>;
-    if (this.state.myCourses.length > 0)
+    console.log('this.props.auth', this.props.auth)
+    // if (!this.state.myCourses && this.props.auth.user) this.checkContributer();
+    // if (!this.state.myCourses) return <h1>Loading </h1>;
+    // if (this.state.myCourses.length > 0)
       return (
         <div>
           <div className="container-fluid">

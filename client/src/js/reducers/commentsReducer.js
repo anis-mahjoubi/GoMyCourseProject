@@ -2,6 +2,7 @@ import {
   GET_COMMENTS,
   ADD_COMMENT,
   DELETE_COMMENT,
+  DELETE_COMMENT_USER,
   LOADING_COMMENT,
 } from "../actions/types";
 
@@ -27,8 +28,16 @@ export default function (state = initialState, action) {
     case DELETE_COMMENT:
       return {
         ...state,
-          comments: state.comments.filter(
-              (comment) => comment._id !== action.payload.commentID
+        comments: state.comments.filter(
+          (comment) => comment._id !== action.payload.commentID
+        ),
+        loading: false,
+      };
+    case DELETE_COMMENT_USER:
+      return {
+        ...state,
+        comments: state.comments.filter(
+          (comment) => comment.id_user !== action.payload.userID
         ),
         loading: false,
       };

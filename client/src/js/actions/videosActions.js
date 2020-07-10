@@ -4,6 +4,8 @@ import {
   ADD_VIDEO_FAIL,
   DELETE_VIDEO,
   DELETE_VIDEO_FAIL,
+  DELETE_USER_VIDEO,
+  DELETE_USER_VIDEO_FAIL,
   UPDATE_VIDEO,
   UPDATE_VIDEO_FAIL,
   LOADING_VIDEOS,
@@ -84,6 +86,27 @@ export const deleteVideo = (videoID) => (dispatch, getState) => {
       );
     });
 };
+
+// export const deleteUserVideo = (userID) => (dispatch, getState) => {
+//   dispatch(setVideosLoading());
+//   Axios.delete(`/api/videos/user/${userID}`, tokenConfig(getState))
+//     .then((res) => {
+//       dispatch(clearErrors());
+//       dispatch({
+//         type: DELETE_USER_VIDEO,
+//         payload: { userID: userID },
+//       });
+//     })
+//     .catch((err) => {
+//       dispatch(
+//         returnErrors(
+//           err.response.data.msg,
+//           err.response.status,
+//           DELETE_USER_VIDEO_FAIL
+//         )
+//       );
+//     });
+// };
 
 export const setVideosLoading = () => {
   return {

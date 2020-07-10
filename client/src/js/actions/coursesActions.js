@@ -10,6 +10,8 @@ import {
   ADD_COURSE_SUCCESS,
   DELETE_VIDEO,
   DELETE_COURSE_FAIL,
+  DELETE_COURSE_USER,
+  DELETE_COURSE_USER_FAIL,
 } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors, clearErrors } from "./errorActions";
@@ -75,23 +77,45 @@ export const updateCourse =(course) => (dispatch,getState) => {
     });
 }
 
-export const deleteCourse = courseID => (dispatch,getState) => {
+export const deleteCourse = courseID => (dispatch, getState) => {
   dispatch(setCoursesLoading());
-  axios.delete(`/api/cours/${courseID}`,tokenConfig(getState))
-    .then (res => {
+  axios.delete(`/api/cours/${courseID}`, tokenConfig(getState))
+    .then(res => {
       dispatch(clearErrors())
-      console.log("sending payload : "+courseID)
+      console.log("sending payload : " + courseID)
       dispatch({
         type: DELETE_COURSE,
         payload: { courseID: courseID },
       });
     })
-    .catch(err=> {
+    .catch(err => {
       dispatch(
         returnErrors(
           err.response.data.msg,
           err.response.status,
           DELETE_COURSE_FAIL
+        )
+      )
+    })
+}
+
+export const deleteUserCourse = userID => (dispatch, getState) => {
+  dispatch(setCoursesLoading());
+  axios.delete(`/api/cours/user/${userID}`, tokenConfig(getState))
+    .then(res => {
+      dispatch(clearErrors())
+      console.log("sending payload : " + userID)
+      dispatch({
+        type: DELETE_COURSE_USER,
+        payload: { userID: userID },
+      });
+    })
+    .catch(err => {
+      dispatch(
+        returnErrors(
+          err.response.data.msg,
+          err.response.status,
+          DELETE_COURSE_USER_FAIL
         )
       )
     })

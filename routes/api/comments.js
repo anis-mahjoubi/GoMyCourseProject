@@ -23,7 +23,7 @@ router.post("/", auth, (req, res) => {
     .catch((err) => console.log(err));
 });
 
-// @route   DELETE api/comments
+// @route   DELETE api/comments/:id
 // @desc    Delete a comment
 // @access  Private
 router.delete("/:id", auth, (req, res) => {
@@ -33,5 +33,14 @@ router.delete("/:id", auth, (req, res) => {
     )
     .catch((err) => res.status(404).json({ deleteSuccess: false }));
 });
+
+// @route   DELETE api/comments/user/:id
+// @desc    Delete all comments of user
+// @access  Private
+router.delete("/user/:id", auth, (req,res) => {
+  Comment.deleteMany({ id_user: req.params.id})
+    .then(() => res.json({ deleteSuccess: true }))
+    .catch((err) => res.status(404).json({ deleteSuccess: false }));
+})
 
 module.exports = router;

@@ -28,7 +28,7 @@ router.put("/:id", auth, (req, res) => {
   Video.findOneAndUpdate({ _id: id }, data).then((video) => res.json(video));
 });
 
-// @route   DELETE api/videos
+// @route   DELETE api/videos/:id
 // @desc    Delete a video
 // @access  Private
 router.delete("/:id", auth, (req, res) => {
@@ -38,5 +38,14 @@ router.delete("/:id", auth, (req, res) => {
     )
     .catch((err) => res.status(404).json({ deleteSuccess: false }));
 });
+
+// // @route   DELETE api/videos/user/:id
+// // @desc    Delete a video
+// // @access  Private
+// router.delete("/user/:id", auth, (req, res) => {
+//   Video.deleteMany({ id_user: req.params.id })
+//     .then(() => res.json({ deleteSuccess: true }))
+//     .catch((err) => res.status(404).json({ deleteSuccess: false }));
+// })
 
 module.exports = router;
